@@ -32,3 +32,25 @@
 - ajouter des données Fake, des 10 produits dans 10 catégories
 - créer un lien catégorie dans le menu qui affiche une page avec toutes les catégories
 - quand on clique sur une cétégorie on affiche tous les produits de cette catégorie
+
+## Etape 3 : ajout de produits
+
+- Créer un nouveau controller `AdminProductController`
+- La méthode index de ce controller (route : admin/product/) doit afficher la liste des produits sous la forme d'un tableau (interface d'administration de gestion de produit)
+- Dans cette page on va créer un bouton "Ajouter un produit" : lien vers une nouvelle route (admin/product/add/) et donc nouvelle méthode dans nos controller.
+- A l'aide de cette documentation (https://symfony.com/doc/current/forms.html) vous allez maintenant dans cette méthode créer un nouveau formulaire mais aussi par la suite traiter ce formulaire.
+- Dans un premier temps on va afficher le formulaire
+- Vous devez créer une classe From spécifique (ProductType) pour votre entité product, reportez vous donc à la bonne partie de la documentation et utilisez le maker (make:form)
+- Cette classe ProductType va définir tous les champs à afficher dans le formulaire, vous allez toutefois rencontrer un problème au niveau du champ 'category' avec la configuration par défaut. Dans un premier temps et pour afficher votre formulaire, vous pouvez mettre en commentaire le `->add('category')` dans votre classe ProductType.
+- Une fois le formulaire correctement affiché, vous pouvez dans votre vue ajouter un bouton submit, mais vous verrez qu'il est aussi possible de l'ajouter dans la classe ProductType
+- Maintenant vous allez regarder du côté du champ category, nous devons ici sélectionner une catégorie existante dans une liste déroulante. Pour cela vous allez devoir paramétrer le champ `category` dans la classe ProductType. Regarder du côté de la doc (https://symfony.com/doc/current/reference/forms/types.html). On peut donc enlever le commentaire et ajouter le type en deuxième paramètre de `add`. Ce type comporte aussi des paramètre complémentaires. Regardez du côté des Choice Fields > EntityType
+- Une fois le champs bien paramétré vous devriez voir une likste déroulante avec toutes les catégories dedans.
+- Vous pouvez maintenant passer à la validation du formulaire en suivant la documentation préalable. Et donc pouvoir ajouter un nouveau produit, puis vous rediriger vers la liste des produits créée au début de cette partie.
+
+
+## Etape 4 : 
+- produire la même chose pour les catégories
+
+
+## Etape 5 : 
+- permettre l'édition d'un produit, puis d'une catégorie

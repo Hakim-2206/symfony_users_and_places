@@ -6,9 +6,21 @@
 {{ dump(date) }}
 <p>{{ date|date("d/m/y") }}</p>
 
+<section class="row">
 {% for product in products %}
-    <h2>{{ product.name }}</h2>
-    <p>{{ product.price }}</p>
-    <a class="btn btn-success" href="{{ path('app_product_detail',{id:product.id}) }}">Détails</a>
+    <div class="card mb-3 col-3">
+        <h3 class="card-header">{{ product.name }}</h3>
+        <div class="card-body">
+            <h5 class="card-title">{{ product.price }}</h5>
+        </div>
+        <img src="{{ product.picture }}" width="200">
+        <div class="card-body">
+            <p>{{ product.price }}</p>
+            <p>Catégorie : {{ product.category.name }}</p>
+            <a class="btn btn-success" href="{{ path('app_product_detail',{id:product.id}) }}">Détails</a>
+        </div>
+            
+    </div>
 {% endfor %}
+</section>
 {% endblock %}

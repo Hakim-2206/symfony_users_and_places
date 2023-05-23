@@ -32,12 +32,10 @@ class FrontController extends AbstractController
         if ($product == null)
             throw new NotFoundHttpException();
 
-        dump($product);
-        /*return
-        $this->render('front/index.html.twig', [
-            'date' => $date,
-            'products' => $products
-        ]);*/
+
+        return $this->render('front/productDetail.html.twig', [
+            'product' => $product
+        ]);
     }
 
     #[Route('pages/{page}', name:'app_static_page', requirements: ['page' => '[a-z]+'])]

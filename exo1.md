@@ -73,3 +73,9 @@ $form = $this->createForm(ProductType::class, $product);
 - Pour sécuriser la suppression vous devez inclure un token CSRF : https://symfony.com/doc/current/security/csrf.html#generating-and-checking-csrf-tokens-manually
 - Et donc vérifier le token avant de supprimer
 - Puis une fois cela fonctionnel, vous devez demander une confirmation avant la suppression. Utilisez une modale Bootstrap... et donc un peu de JS. Le formulaire est dans la modale, mais il ne doit y avoir qu'une modale dans votre page. Donc en JS : modification de l'url (route) de soumission du formulaire avec l'id du produit
+
+## Etape 8 : upload des images
+- créez un service d'upload : https://symfony.com/doc/current/controller/upload_file.html
+- permettre à notre service de recevoir un sous dossier en plus du dossier d'upload, par exemple 'product' ou 'category'. Ce dossier sera transmis à la méthode upload lors de l'appel. IL mpermet de classer les uploads dans le dossier uploads mais dans des sous dossier selon les entités.
+- utiliser ce service pour Uploader l'image, donc ajouter un champ de type file pour l'image dans le formulaire productType, récupérez là dans le controller et uploadez la
+- reportez vous à la documentation, vous pouvez d'abord tester un upload directement dans le contrôleur pour le comprendre, puis passer à la création du servie.

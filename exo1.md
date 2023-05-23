@@ -43,14 +43,23 @@
 - Vous devez créer une classe From spécifique (ProductType) pour votre entité product, reportez vous donc à la bonne partie de la documentation et utilisez le maker (make:form)
 - Cette classe ProductType va définir tous les champs à afficher dans le formulaire, vous allez toutefois rencontrer un problème au niveau du champ 'category' avec la configuration par défaut. Dans un premier temps et pour afficher votre formulaire, vous pouvez mettre en commentaire le `->add('category')` dans votre classe ProductType.
 - Une fois le formulaire correctement affiché, vous pouvez dans votre vue ajouter un bouton submit, mais vous verrez qu'il est aussi possible de l'ajouter dans la classe ProductType
-- Maintenant vous allez regarder du côté du champ category, nous devons ici sélectionner une catégorie existante dans une liste déroulante. Pour cela vous allez devoir paramétrer le champ `category` dans la classe ProductType. Regarder du côté de la doc (https://symfony.com/doc/current/reference/forms/types.html). On peut donc enlever le commentaire et ajouter le type en deuxième paramètre de `add`. Ce type comporte aussi des paramètre complémentaires. Regardez du côté des Choice Fields > EntityType
+- Maintenant vous allez regarder du côté du champ category dans le formulaire ProductType pour l'ajout d'un produit, nous devons ici sélectionner une catégorie existante dans une liste déroulante. Pour cela vous allez devoir paramétrer le champ `category` dans la classe ProductType. Regarder du côté de la doc (https://symfony.com/doc/current/reference/forms/types.html). On peut donc enlever le commentaire et ajouter le type en deuxième paramètre de `add`. Ce type comporte aussi des paramètrse complémentaires. Regardez du côté des Choice Fields > EntityType
 - Une fois le champs bien paramétré vous devriez voir une likste déroulante avec toutes les catégories dedans.
 - Vous pouvez maintenant passer à la validation du formulaire en suivant la documentation préalable. Et donc pouvoir ajouter un nouveau produit, puis vous rediriger vers la liste des produits créée au début de cette partie.
 
 
 ## Etape 4 : 
-- produire la même chose pour les catégories
+- produire la même chose pour les catégories et donc permettre d'ajouter une catégorie
 
 
 ## Etape 5 : 
 - permettre l'édition d'un produit, puis d'une catégorie
+- pour cela, nous utilisons le même processus que pour l'ajout mais notre entité de départ (qui sert à la création du fomulaire n'est pas vide)
+
+```php
+// pour l'ajout $product était un nouveau produit, que se passe t'il si $product contient
+// un produit existant
+// vous pouvez créer une route qui reçoit l'id du produit et le charge avec @ParamConverter
+// et du coup tester le code de l'ajout sans la création initial du product
+$form = $this->createForm(ProductType::class, $product);
+```

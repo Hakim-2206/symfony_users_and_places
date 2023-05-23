@@ -27,6 +27,19 @@ class FrontController extends AbstractController
         ]);
     }
 
+    #[Route('/product/{id<\d+>?}', name: 'app_product_detail')]
+    public function productDetail(Product $product = null):Response {
+        if ($product == null)
+            throw new NotFoundHttpException();
+
+        dump($product);
+        /*return
+        $this->render('front/index.html.twig', [
+            'date' => $date,
+            'products' => $products
+        ]);*/
+    }
+
     #[Route('pages/{page}', name:'app_static_page', requirements: ['page' => '[a-z]+'])]
     public function staticPage(string $page, Environment $twig): Response
     {

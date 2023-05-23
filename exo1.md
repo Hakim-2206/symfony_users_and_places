@@ -27,7 +27,7 @@
 
 ## Etape 2
 
-- Créer une entité catégorie
+- Créer une entité catégorie (name, slug, description, picture)
 - créer une relation OneToMany (chaque Produit appartient à une Catégorie)
 - ajouter des données Fake, des 10 produits dans 10 catégories
 - créer un lien catégorie dans le menu qui affiche une page avec toutes les catégories

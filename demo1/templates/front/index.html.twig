@@ -7,7 +7,8 @@
 <p>{{ date|date("d/m/y") }}</p>
 
 {% for product in products %}
-    <h2>{{ product.title }}</h2>
+    <h2>{{ product.name }}</h2>
     <p>{{ product.price }}</p>
+    <a class="btn btn-success" href="{{ path('app_product_detail',{id:product.id}) }}">Détails</a>
 {% endfor %}
 {% endblock %}

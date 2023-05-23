@@ -63,3 +63,13 @@
 // et du coup tester le code de l'ajout sans la création initial du product
 $form = $this->createForm(ProductType::class, $product);
 ```
+
+## Etape 6 : 
+- créer un dépôt GITHUB et pusher votre projet dessus, me donner le lien ;)
+
+## Etape 7 :
+- création de la suppression d'un produit, puis d'une catégorie (impossible si des produits y sont associés)
+- /!\toute modification de la base doit se faire en méthode POST et vous devez faire une Redirection After POST. La méthode de suppression ne doit répondre qu'à une requête POST 
+- Pour sécuriser la suppression vous devez inclure un token CSRF : https://symfony.com/doc/current/security/csrf.html#generating-and-checking-csrf-tokens-manually
+- Et donc vérifier le token avant de supprimer
+- Puis une fois cela fonctionnel, vous devez demander une confirmation avant la suppression. Utilisez une modale Bootstrap... et donc un peu de JS. Le formulaire est dans la modale, mais il ne doit y avoir qu'une modale dans votre page. Donc en JS : modification de l'url (route) de soumission du formulaire avec l'id du produit

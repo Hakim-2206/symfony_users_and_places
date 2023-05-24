@@ -1,0 +1,14 @@
+{% extends 'admin.html.twig' %}
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block title %}{% if edit %}Editer {{ product.name }} {% else %} Ajouter un produit{% endif %}{% endblock %}
+
+
+
+{% block body %}
+{{ form_start(form) }}
+    {{ form_row(form) }}
+    <input type="submit" value="Enregistrer">
+{{ form_end(form) }}
+{% endblock %}

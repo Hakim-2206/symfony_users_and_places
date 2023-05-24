@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use Twig\Environment;
 use App\Entity\Product;
-use App\Repository\ProductRepository;
+use App\Entity\Category;
 use Doctrine\ORM\EntityRepository;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,14 +29,35 @@ class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id<\d+>?}', name: 'app_product_detail')]
+    //#[Route('/product/{id<\d+>?}', name: 'app_product_detail')]
+    #[Route('/product/{slug}', name: 'app_product_detail')]
     public function productDetail(Product $product = null):Response {
         if ($product == null)
             throw new NotFoundHttpException();
 
-
         return $this->render('front/productDetail.html.twig', [
             'product' => $product
+        ]);
+    }
+
+    #[Route('/categories', name: 'app_categories')]
+    public function categories( CategoryRepository $categoryRepository): Response
+    {
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('front/categories.html.twig', [
+            'categories' => $categories
+        ]);
+    }
+
+    #[Route('/category/{slug}', name: 'app_category_detail')]
+    public function categoryDetail(Category $category = null): Response
+    {
+        if ($category == null)
+            throw new NotFoundHttpException();
+
+        return $this->render('front/categoryDetail.html.twig', [
+            'category' => $category
         ]);
     }
 
@@ -46,7 +69,7 @@ class FrontController extends AbstractController
         if (!$loader->exists($template))
             throw new NotFoundHttpException();
 
-        return $this->render($template, []);
+        return $this->render($template, ['page'=>$page]);
     }
 
 }

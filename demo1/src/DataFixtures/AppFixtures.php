@@ -31,7 +31,7 @@ class AppFixtures extends Fixture
             ->setDescription($faker->paragraph(3))
             ->setCreatedAt(new \DateTimeImmutable($faker->date()))
             ->setSlug($slug)
-            ->setPicture('https://picsum.photos/800/600?id' . $j);
+            ->setPicture('https://picsum.photos/seed/cat'.$j.'/1600');
 
             $manager->persist($category);
 
@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
                 $product->setName($name)
                 ->setDescription($faker->paragraph(3))
                 ->setPrice($faker->randomFloat(2, 0, 5000))
-                ->setPicture('https://picsum.photos/800/600?id'.$i)
+                ->setPicture('https://picsum.photos/seed/prod'.$i.'/1600')
                 ->setSlug($slug)
                 ->setCreatedAt(new \DateTimeImmutable($faker->date()))
                 ->setCategory($category);

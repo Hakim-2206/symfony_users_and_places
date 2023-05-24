@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les catégories{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item active" aria-current="page">Catégories</li>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+{% for category in categories %}
+<div class="col-3">
+    <div class="card mb-3">
+        <h3 class="card-header">{{ category.name }}</h3>
+        <img src="{{ category.picture }}" width="200">
+        <div class="card-body">
+            <a class="btn btn-success" href="{{ path('app_category_detail', {slug:category.slug}) }}">Voir les produits</a>
+        </div>
+            
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

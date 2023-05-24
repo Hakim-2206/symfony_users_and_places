@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categorie :{{ category.name }}{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="{{ path('app_categories') }}">Catégories</a></li>
+<li class="breadcrumb-item active" aria-current="page">Catégorie {{ category.name }}</li>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="row">
+{% for product in category.products %}
+    {{ include('front/_product.html.twig') }}
+{% endfor %}
+</div>
+
+{% endblock %}

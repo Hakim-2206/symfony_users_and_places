@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block breadcrumb %}
+<li class="breadcrumb-item"><a href="#">Product</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+{% endblock %}
 
 {% block body %}
 
-<div class="card mb-3">
-    <h3 class="card-header">{{ product.name }}</h3>
-    <div class="card-body">
-        <h5 class="card-title">{{ product.price }}</h5>
+<div class="row">
+    <div class="col-6">
+        <img src="{{ product.picture }}" class="img-fluid">
     </div>
-    <img src="{{ product.picture }}" width="200">
-    <div class="card-body">
+    <div class="col-6">
         <p>{{ product.description }}</p>
-        <p class="badge bg-dark">{{ product.price }}</p>
+        <p class="badge bg-dark">{{ product.price }} €</p>
+        <button class="btn btn-primary">Ajouter au panier</button>
     </div>
         
 </div>

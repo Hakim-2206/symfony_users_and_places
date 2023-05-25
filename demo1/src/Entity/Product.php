@@ -9,7 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[UniqueEntity(fields: ['slug'])]
+#[UniqueEntity(fields: ['slug'], message: 'There is already an product with this slug')]
 class Product
 {
     #[ORM\Id]
@@ -31,7 +31,7 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private ?string $slug = null;
 
     #[ORM\Column]

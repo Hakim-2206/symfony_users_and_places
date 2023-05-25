@@ -83,3 +83,41 @@ $form = $this->createForm(ProductType::class, $product);
 # Etape 9 : Readme
 
 Faire un readme.md pour expliquer les étapes pour installer et tester votre projet.
+
+# Etape 10 : Sécurisation de l'admin
+
+- Créer une entité utilisateur (provider pour le firewall) avec un `make:user`
+- Créer un CRUD pour les utilisateurs avec un controller "AdminUserController"
+- Modifier le "UserType" pour créer une sélection multiple pour le ROLE et un champ double non mappé pour le password (le mot de passe en clair ne doit pas être mappé avec l'entité)
+
+```php
+->add('roles', ChoiceType::class, [
+    'required' => true,
+    'multiple' => true,
+    'choices' => ['Admin' => 'ROLE_ADMIN', 'Manager' => 'ROLE_MANAGER', 'Customer' => 'ROLE_CUSTOMER']
+])
+->add('plainPassword', RepeatedType::class, [
+    'type' => PasswordType::class,
+    'mapped' => false,
+    'first_options'  => ['label' => 'Mot de passe'],
+    'second_options' => ['label' => 'Confirmer mot de passe'],
+    'attr' => ['autocomplete' => 'new-password'],
+    'constraints' => [
+        new NotBlank([
+            'message' => 'Please enter a password',
+        ]),
+        new Length([
+            'min' => 6,
+            'minMessage' => 'Your password should be at least {{ limit }} characters',
+            // max length allowed by Symfony for security reasons
+            'max' => 4096,
+        ]),
+    ],
+])
+```
+- Dans le controller du CRUD, pour l'ajout d'un utilisateur, vous devez récupérer le mot de passe 'plainPassword' et le hasher avant de le rajouter dans l'entité, puis flusher vers la base
+- Ajouter un utilisateur dans votre base
+- Créez un formulaire de login : https://symfony.com/doc/current/security.html#form-login avec un token CSRF
+- Modifier le fichier "security.yaml" dans config, et modifier le "access_control:" pour sécuriser toutes les routes commençant par 'admin/' et permettre l'accès au utilisateur connecté avec le role ROLE_ADMIN
+- Vous pouvez vous connecter ! 
+

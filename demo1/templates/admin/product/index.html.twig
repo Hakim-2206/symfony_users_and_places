@@ -2,6 +2,11 @@
 
 {% block title %}Tous les produits{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/main.js') }}" defer></script>
+{% endblock %}
+
 {% block body %}
 <a href="{{ path('app_admin_product_add') }}" class="btn btn-primary">Ajouter</a>
 <table class="table">
@@ -10,6 +15,7 @@
             <th>id</th>
             <th>Nom</th>
             <th>Image</th>
+            <th>Prix</th>
             <th>Slug</th>
             <th>Date de création</th>
             <th></th>
@@ -21,11 +27,36 @@
             <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td><img src="{{ product.picture }}" width="100"></td>
+            <td>{{ product.price }} €</td>
             <td>{{ product.slug }}</td>
             <td>{{ product.createdAt|date('d/m/Y') }}</td>
-            <td><a href="{{ path('app_admin_product_edit',{id:product.id}) }}">Edit</a></td>
+            <td>
+                <a href="{{ path('app_admin_product_edit',{id:product.id}) }}" class="btn btn-primary">Edit</a>
+                <button class="delete btn btn-warning" data-token="{{ csrf_token('delete' ~ product.id) }}" data-url="{{ path('app_admin_product_delete', {'id': product.id}) }}">Delete</button>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<div class="modal" id="modalDelete" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Suppression</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="">
+            <div class="modal-body">
+                <input type="hidden" name="_token" id="token" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-warning" value="Delete">
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

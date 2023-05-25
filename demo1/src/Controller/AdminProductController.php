@@ -55,4 +55,15 @@ class AdminProductController extends AbstractController
         ]);
     }
 
+
+    #[Route('/delete/{id}', name: 'product_delete', methods: ['POST'])]
+    public function delete(Request $request, Product $product, ProductRepository $productRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
+            $productRepository->remove($product, true);
+        }
+
+        return $this->redirectToRoute('app_admin_product', [], Response::HTTP_SEE_OTHER);
+    }
+
 }

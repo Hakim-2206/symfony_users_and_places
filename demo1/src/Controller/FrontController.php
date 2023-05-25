@@ -90,7 +90,18 @@ class FrontController extends AbstractController
 
         $mailer->send($email);
 
-        return $this->render('front/pages/contact.html.twig',);
+        return $this->render('front/pages/contact.html.twig');
+    }
+
+    //#[Route('/catjson')]
+    public function categoryListPart(CategoryRepository $categoryRepository):Response
+    {
+        $categories = $categoryRepository->findAll();
+
+        return $this->render('front/_categoriesMenu.html.twig',[
+            'categories'=> $categories
+        ]);
+        //return $this->json(json_encode(($categories)));
     }
 
 }

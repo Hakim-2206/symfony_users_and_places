@@ -25,6 +25,7 @@ class Product
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?float $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]

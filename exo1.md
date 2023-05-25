@@ -115,6 +115,18 @@ Faire un readme.md pour expliquer les étapes pour installer et tester votre pro
     ],
 ])
 ```
+On peut récupérer le plainPassword dans le COntroller et le Hasher : 
+```php
+//...
+$plaintextPassword = $form->get("plainPassword")->getData();
+// hash the password (based on the security.yaml config for the $user class)
+$hashedPassword = $passwordHasher->hashPassword(
+    $user,
+    $plaintextPassword
+);
+$user->setPassword($hashedPassword);
+```
+
 - Dans le controller du CRUD, pour l'ajout d'un utilisateur, vous devez récupérer le mot de passe 'plainPassword' et le hasher avant de le rajouter dans l'entité, puis flusher vers la base
 - Ajouter un utilisateur dans votre base
 - Créez un formulaire de login : https://symfony.com/doc/current/security.html#form-login avec un token CSRF

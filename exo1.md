@@ -141,5 +141,5 @@ $user->setPassword($hashedPassword);
 - Migration vers la base
 
 - Faire un formulaire d'authentification  avec " make:registration-form" pour l'entité USER
-- Corrigé pour demander 2 fois le mot de passe et affecter un ROLE_CUSTOMER à l'enregistrement (ne pas demande rôle bien sûr)
-- Rajouter le formulaire pour saisir en même temps que le User, le customer associé : https://symfony.com/doc/current/form/embedded.html
+- Corriger le code pour demander 2 fois le mot de passe et affecter un ROLE_CUSTOMER à l'enregistrement (ne pas demande rôle bien sûr)
+- Rajouter le formulaire pour saisir en même temps le customer associé : https://symfony.com/doc/current/form/embedded.html

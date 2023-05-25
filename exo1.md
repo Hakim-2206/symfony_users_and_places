@@ -86,7 +86,7 @@ Faire un readme.md pour expliquer les étapes pour installer et tester votre pro
 
 # Etape 10 : Sécurisation de l'admin
 
-- Créer une entité utilisateur (provider pour le firewall) avec un `make:user`
+- Créer une entité utilisateur (provider pour le firewall) avec un `make:user` : https://symfony.com/doc/current/security.html#the-user
 - Créer un CRUD pour les utilisateurs avec un controller "AdminUserController"
 - Modifier le "UserType" pour créer une sélection multiple pour le ROLE et un champ double non mappé pour le password (le mot de passe en clair ne doit pas être mappé avec l'entité)
 
@@ -120,4 +120,14 @@ Faire un readme.md pour expliquer les étapes pour installer et tester votre pro
 - Créez un formulaire de login : https://symfony.com/doc/current/security.html#form-login avec un token CSRF
 - Modifier le fichier "security.yaml" dans config, et modifier le "access_control:" pour sécuriser toutes les routes commençant par 'admin/' et permettre l'accès au utilisateur connecté avec le role ROLE_ADMIN
 - Vous pouvez vous connecter ! 
+- Gérez le logout avec une route /logout
 
+# Etape 11 : Création de client
+
+- Créez une entité Customer (firstname, lastname, address, zipCode, city, country, phone)
+- Relation OneToOne avec un User
+- Migration vers la base
+
+- Faire un formulaire d'authentification  avec " make:registration-form" pour l'entité USER
+- Corrigé pour demander 2 fois le mot de passe et affecter un ROLE_CUSTOMER à l'enregistrement (ne pas demande rôle bien sûr)
+- Rajouter le formulaire pour saisir en même temps que le User, le customer associé : https://symfony.com/doc/current/form/embedded.html

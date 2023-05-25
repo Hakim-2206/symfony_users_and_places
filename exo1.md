@@ -141,5 +141,24 @@ $user->setPassword($hashedPassword);
 - Migration vers la base
 
 - Faire un formulaire d'authentification  avec " make:registration-form" pour l'entité USER
+- Valider un email de confirmation
 - Corriger le code pour demander 2 fois le mot de passe et affecter un ROLE_CUSTOMER à l'enregistrement (ne pas demande rôle bien sûr)
 - Rajouter le formulaire pour saisir en même temps le customer associé : https://symfony.com/doc/current/form/embedded.html
+
+- il faudra apporter quelques modification :
+  - faire une migration pour le isValidate
+  - remonter les messages Flash dans notre interface (on verra les messages Flash en Juin)
+
+# Etape 12 : Récupérer l'email de validation
+- Télécharger MailHog pour votre système
+- Exécutez le (de sans froid)... une fenêtre reste ouverte (fait froid)
+- Configurer l'envoie d'email symfony dans le .env.local :
+
+```bash
+# on envoie les message en mode synchrone pour notre cas
+MESSENGER_TRANSPORT_DSN=sync://
+# on utilise le SMTP de MailHog pour l'envoi des email... tous les emails seront capturés
+MAILER_DSN=smtp://127.0.0.1:1025
+```
+
+- connectez vous à mailHog : http://localhost:8025/ vous valider l'email d'enregistrement !

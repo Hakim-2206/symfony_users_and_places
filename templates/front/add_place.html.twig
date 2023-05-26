@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+
+{% form_theme form  'bootstrap_5_layout.html.twig' %}
+
+{% block body %}
+    <h1>Create a Place</h1>
+
+    {{ form_start(form) }}
+    
+    {{ form_end(form) }}
+{% endblock %}

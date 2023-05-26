@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		{% for place in places %}
+			<div class="col-md-2">
+				<div class="card p-2" style="width: 25rem; margin:auto;">
+					<div class="card-body">
+						<h3 class="card-title">Place : {{ place.name }}</h3>
+						<p class="card-text">Description de la place :
+							{{ place.description }}</p>
+						{# <p class="card-text">Publiée par :
+							{{ place.user.name }}
+							€</p> #}
+						{# <p class="card-text">Catégorie : {{ product.category.name }}</p>
+					    <p class="card-text">Créé le : {{ product.createdAt|date('d/m/Y H:i:s') }}</p> #}
+					<a href="{{ path('app_places_detail', { 'id': place.id }) }}" class="btn btn-primary">Détails</a>
+                    </div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de la place
+{% endblock %}
+
+{% block body %}
+	<h2>{{ places.name }}</h2>
+	<p>Description: {{ places.description }}</p>
+	<p>latitude
+		{{ places.latitude }}</p>
+        <p>longitude
+		{{ places.longitude }}</p>
+	<img src="{{ places.photos }}" alt="Image du produit">
+	{# <p>Créé le :
+		{{ places.created_at|date('d/m/Y H:i:s') }}</p>
+	<p>Modifié le :
+		{{ places.modifiedAt|date('d/m/Y H:i:s') }}</p> #}
+{% endblock %}

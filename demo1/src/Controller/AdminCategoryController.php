@@ -22,9 +22,12 @@ class AdminCategoryController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CategoryRepository $categoryRepository): Response
+    #[Route('/{id}/edit', name: 'app_admin_category_edit', methods: ['GET', 'POST'])]
+    public function new(Category $category=null, Request $request, CategoryRepository $categoryRepository): Response
     {
-        $category = new Category();
+        if($category==null)
+            $category = new Category();
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
@@ -38,14 +41,6 @@ class AdminCategoryController extends AbstractController
         return $this->render('admin_category/new.html.twig', [
             'category' => $category,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_admin_category_show', methods: ['GET'])]
-    public function show(Category $category): Response
-    {
-        return $this->render('admin_category/show.html.twig', [
-            'category' => $category,
         ]);
     }
 

@@ -151,7 +151,7 @@ $user->setPassword($hashedPassword);
 
 # Etape 12 : Récupérer l'email de validation
 - Télécharger MailHog pour votre système
-- Exécutez le (de sans froid)... une fenêtre reste ouverte (fait froid)
+- Exécutez le (de sang froid)... une fenêtre reste ouverte (fait froid)
 - Configurer l'envoie d'email symfony dans le .env.local :
 
 ```bash
@@ -162,3 +162,7 @@ MAILER_DSN=smtp://127.0.0.1:1025
 ```
 
 - connectez vous à mailHog : http://localhost:8025/ vous valider l'email d'enregistrement !
+
+
+# Etape 13 :
+- Optimisation des entités avec les dates : https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/timestampable.md#entity-mapping

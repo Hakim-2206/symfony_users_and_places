@@ -5,7 +5,7 @@
 Des utilisateurs peuvent consulter la page d'accueil du site qui donne accès à l'inscription et au login. 
 Des utilisateurs peuvent consulter une liste des lieux insolites proposés par d'autres, sur la page d'accueil et classés par date de publication décroissante.
 Des utilisateurs peuvent consulter le détails d'un lieu insolite (Descriptions, photos) 
-Des utilisateurs peuvent créer leur compte et seront connectés automatiquement
+Des utilisateurs peuvent créer leur compte et seront connectés automatiquement (pas de vérif email)
 Des utilisateurs connectés peuvent consulter la page d'accueil et accéder au logout
 Des utilisateurs connectés peuvent accéder à saisie d'un lieu insolite
 Des utilisateurs connectés peuvent lister leurs lieux insolites
@@ -25,6 +25,7 @@ Un lieu est représenté par :
 - Des coordonnées GPS (latitude et longitude)
 - Des photos (plusieurs photo par lieu)
 - Une date de publication et de mofification
+- L'utilisateur qui a créé le lieu
 
 
 Un utilisateur est représenté par :
@@ -47,5 +48,5 @@ Vous devrez me faire une démo de votre support en fin de journée.
 - Créez la base de données, vos entités (utilisez le make:user pour l'entité user) et leur relation et migrez vers la base
 - Créez les fonctionnalités de création de compte
 - Créez la partie saisie d'un lieu (utilisez le crud de Symfony)
-- Permettre l'ajout de plusieurs photos une fois un lieu créé (on ne saisie pas les photos dans le formulaire d'un lieu). Il faudra passer par le Crud symfony mais y ajouter une gestion de l'identifiant de du lieu.
+- Permettre l'ajout de plusieurs photos une fois un lieu créé (on ne saisie pas les photos dans le formulaire d'un lieu). Il faudra passer par le Crud symfony pour les photos mais y ajouter une gestion de l'identifiant de du lieu.
 - Pour la mise en page, faire au plus simple, utilisez un Bootstrap, TailWind. Ce n'est pas le plus important et ça doit arriver à la fin !

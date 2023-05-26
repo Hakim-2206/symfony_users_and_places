@@ -1,5 +1,6 @@
 # Symfony première installation
 
+Retouvez les notions et les commandes de bases de Symfony
 
 ## Préalable
 
@@ -122,3 +123,35 @@ php bin/console make:migration
 php bin/console doctrine:migrations:migrate
 ```
 > https://symfony.com/doc/current/doctrine.html#migrations-creating-the-database-tables-schema
+
+
+Type de propriété dans les entités
+
+Les relation entre entités
+
+La création de formulaire basé sur une entité
+
+make:form
+
+Gérer le type de champ des formulaires
+
+type de champs
+
+Valider, gérer les contraintes sur les champs
+
+validation/contraintes
+
+Automatiser la création d'un CRUD
+
+make:crud
+
+Automatiser la création d'une classe User
+
+make:user
+
+
+Création d'un formulaire de login
+
+login
+
+make:registration-form

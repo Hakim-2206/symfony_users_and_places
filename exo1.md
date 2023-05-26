@@ -78,7 +78,7 @@ $form = $this->createForm(ProductType::class, $product);
 - créez un service d'upload : https://symfony.com/doc/current/controller/upload_file.html
 - permettre à notre service de recevoir un sous dossier en plus du dossier d'upload, par exemple 'product' ou 'category'. Ce dossier sera transmis à la méthode upload lors de l'appel. IL mpermet de classer les uploads dans le dossier uploads mais dans des sous dossier selon les entités.
 - utiliser ce service pour Uploader l'image, donc ajouter un champ de type file pour l'image dans le formulaire productType, récupérez là dans le controller et uploadez la
-- reportez vous à la documentation, vous pouvez d'abord tester un upload directement dans le contrôleur pour le comprendre, puis passer à la création du servie.
+- reportez vous à la documentation, vous pouvez d'abord tester un upload directement dans le contrôleur pour le comprendre, puis passer à la création du service.
 
 # Etape 9 : Readme
 

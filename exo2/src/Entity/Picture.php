@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PictureRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 class Picture
@@ -11,15 +14,19 @@ class Picture
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['search'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['search'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['search'])]
     private ?string $file = null;
 
     #[ORM\Column]
+    #[Groups(['search'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -28,6 +35,11 @@ class Picture
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Place $place = null;
+
+    /**
+     * Le fichier upload : pas de lien ORM
+     */
+    private UploadedFile $pictureFile;
 
     public function getId(): ?int
     {
@@ -90,6 +102,24 @@ class Picture
     public function setPlace(?Place $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pictureFile
+     */
+    public function getPictureFile(): UploadedFile
+    {
+        return $this->pictureFile;
+    }
+
+    /**
+     * Set the value of pictureFile
+     */
+    public function setPictureFile(UploadedFile $pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
 
         return $this;
     }

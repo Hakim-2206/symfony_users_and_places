@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\PlaceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\PlaceRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: PlaceRepository::class)]
 class Place
@@ -14,34 +17,43 @@ class Place
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['search'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['search'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['search'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 8)]
+    #[Groups(['search'])]
     private ?string $latitude = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 11, scale: 8)]
+    #[Groups(['search'])]
     private ?string $longitude = null;
 
     #[ORM\Column]
+    #[Groups(['search'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $modifiedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['search'])]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'places')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['search'])]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Picture::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'place', targetEntity: Picture::class, orphanRemoval: true, cascade: ["persist"])]
+    #[Groups(['search'])]
     private Collection $pictures;
 
     public function __construct()

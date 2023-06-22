@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Place;
+use App\Entity\Picture;
 use App\Form\PlaceType;
+use App\Service\FileUploader;
 use App\Repository\PlaceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,21 +24,39 @@ class PlaceController extends AbstractController
     {
         $user = $this->getUser();
         return $this->render('place/index.html.twig', [
-            'places' => $placeRepository->findBy(['user'=> $user->getId()]),
+            'places' => $placeRepository->findBy(['user' => $user->getId()]),
         ]);
     }
 
     #[Route('/new', name: 'app_place_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, PlaceRepository $placeRepository, SluggerInterface $sluggerInterface): Response
+    public function new(Request $request, FileUploader $fileUploader, PlaceRepository $placeRepository, SluggerInterface $sluggerInterface): Response
     {
         $place = new Place();
+        $picture = new Picture();
+        $picture->setTitle('');
+        $place->addPicture($picture);
+
         $form = $this->createForm(PlaceType::class, $place);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $place->setCreatedAt(new \DateTimeImmutable());
+            $createdAt = new \DateTimeImmutable();
+            $place->setCreatedAt($createdAt);
             $place->setUser($this->getUser());
             $place->setSlug($sluggerInterface->slug($place->getName())->lower());
+
+            $pictures = $place->getPictures();
+
+            if ($pictures) {
+                foreach ($pictures as $picture) {
+                    if (!empty($picture->getPictureFile())) {
+                        $filename = $fileUploader->upload($picture->getPictureFile(), 'place');
+                        $picture->setFile($filename);
+                        $picture->setCreatedAt($createdAt);
+                    }
+                }
+            }
+
             $placeRepository->save($place, true);
 
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
@@ -53,7 +73,7 @@ class PlaceController extends AbstractController
     {
 
         // Si l'utilisateur n'est pas le bon
-        if($this->getUser() != $place->getUser())
+        if ($this->getUser() != $place->getUser())
             throw new AccessDeniedException('Accès non autorisé !');
 
         $form = $this->createForm(PlaceType::class, $place);
@@ -62,7 +82,7 @@ class PlaceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $place->setModifiedAt(new \DateTimeImmutable());
             $place->setSlug($sluggerInterface->slug($place->getName())->lower());
-            
+
             $placeRepository->save($place, true);
 
             return $this->redirectToRoute('app_place_index', [], Response::HTTP_SEE_OTHER);
@@ -77,7 +97,7 @@ class PlaceController extends AbstractController
     #[Route('/delete/{id}', name: 'app_place_delete', methods: ['POST'])]
     public function delete(Request $request, Place $place, PlaceRepository $placeRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$place->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $place->getId(), $request->request->get('_token'))) {
             $placeRepository->remove($place, true);
         }
 

@@ -1,4 +1,25 @@
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.latitude) }}
+    {{ form_row(form.longitude) }}
+    <h2>Vos images du lieu</h2>
+    
+
+    <div data-controller ="pictures"
+        data-pictures-index-value="{{ form.pictures|length > 0 ? form.pictures|last.vars.name + 1 : 0 }}"
+        data-pictures-prototype-value="{{ form_widget(form.pictures.vars.prototype)|e('html_attr') }}">
+        <div data-pictures-target = "collection">
+            {% if form.pictures|length > 0 %}
+            {% for picture in form.pictures %}
+                {{ form_row(picture.pictureFile) }}
+                {{ form_row(picture.title) }}
+            {% endfor %}
+            {% endif %}
+        </div>
+        <button type="button" data-action="pictures#add" class="btn btn-outline-dark">+ Ajouter une image</button>
+    </div>
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
